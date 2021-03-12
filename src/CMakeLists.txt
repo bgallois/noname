@@ -34,10 +34,12 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        resources.qrc
         ${TS_FILES}
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
+
     qt_add_executable(QBackup
         ${PROJECT_SOURCES}
     )
@@ -51,6 +53,7 @@ else()
     else()
         add_executable(QBackup
             ${PROJECT_SOURCES}
+            ${RESOURCES_RCC}
         )
     endif()
 
