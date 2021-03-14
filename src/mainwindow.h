@@ -2,10 +2,16 @@
 #define MAINWINDOW_H
 
 #include <QCloseEvent>
+#include <QDir>
+#include <QFileSystemModel>
 #include <QIcon>
+#include <QKeySequence>
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QShortcut>
+#include <QString>
 #include <QSystemTrayIcon>
+#include "backupfilemodel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

@@ -9,24 +9,28 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="10"/>
+        <location filename="mainwindow.cpp" line="12"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="13"/>
+        <location filename="mainwindow.cpp" line="15"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="27"/>
+        <location filename="mainwindow.cpp" line="36"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="50"/>
         <source>Systray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="28"/>
-        <source>The program will keep running in the system tray. To terminate the program, choose &lt;b&gt;Close&lt;/b&gt; in the context menu of the system tray entry.</source>
-        <oldsource>The program will keep running in the system tray. To terminate the program, choose &lt;b&gt;Quit&lt;/b&gt; in the context menu of the system tray entry.</oldsource>
+        <location filename="mainwindow.cpp" line="51"/>
+        <source>The program will keep running in the system tray. To terminate the program, choose &lt;b&gt;Close&lt;/b&gt; in the context menu of the system tray entry. To restore the program choose &lt;b&gt;Restore&lt;/b&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

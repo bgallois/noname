@@ -34,6 +34,8 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        backupfilemodel.cpp
+        backupfilemodel.h
         resources.qrc
         ${TS_FILES}
 )
