@@ -40,6 +40,9 @@ MainWindow::MainWindow(QWidget *parent)
       deleteShort, &QShortcut::activated, [this, backupFileModel, deleteShort]() {
         backupFileModel->removeRow(ui->ui_backupFileView->currentIndex().row(), ui->ui_backupFileView->currentIndex().parent());
       });
+
+  // Path
+  connect(ui->ui_destBut, &QPushButton::clicked, this, &MainWindow::setSaveRoot);
 }
 
 MainWindow::~MainWindow() {
@@ -70,4 +73,10 @@ void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason) {
     }
     default:;
   }
+}
+
+void MainWindow::setSaveRoot() {
+  QString dir = QFileDialog::getExistingDirectory(this, tr("Select Directory"), QDir::homePath(), QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+  ui->ui_destDisp->setText(dir);
+  rootSavePath = dir;
 }

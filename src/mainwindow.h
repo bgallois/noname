@@ -3,6 +3,7 @@
 
 #include <QCloseEvent>
 #include <QDir>
+#include <QFileDialog>
 #include <QFileSystemModel>
 #include <QIcon>
 #include <QKeySequence>
@@ -32,8 +33,10 @@ class MainWindow : public QMainWindow {
  private:
   Ui::MainWindow *ui;
   QSystemTrayIcon *trayIcon;
+  QString rootSavePath;
 
  private slots:
   void iconActivated(QSystemTrayIcon::ActivationReason reason);
+  void setSaveRoot();
 };
 #endif  // MAINWINDOW_H

@@ -38,12 +38,26 @@ QStringList BackupFileModel::mimeTypes() const {
 }
 
 void BackupFileModel::addFolder(QUrl url) {
-  QStringList splitPath = url.toLocalFile().split("/", QString::SkipEmptyParts);
-  QFileIconProvider provider;
-  QStandardItem *lastNode = node;
-  for (auto const &i : splitPath) {
-    QStandardItem *item = new QStandardItem(provider.icon(QFileIconProvider::Folder), i);
-    lastNode->appendRow(item);
-    lastNode = item;
+  QString path = url.toLocalFile();
+  if (setPath(path)) {
+    QStringList splitPath = path.split("/", QString::SkipEmptyParts);
+    QFileIconProvider provider;
+    QStandardItem *lastNode = node;
+    for (auto const &i : splitPath) {
+      QStandardItem *item = new QStandardItem(provider.icon(QFileIconProvider::Folder), i);
+      lastNode->appendRow(item);
+      lastNode = item;
+    }
   }
+}
+
+bool BackupFileModel::setPath(QString path) {
+  QString absolutePath = QDir("/" + path).absolutePath();
+  for (auto const &a : savePath) {
+    if (absolutePath.contains(a)) {
+      return false;
+    }
+  }
+  savePath.append(absolutePath);
+  return true;
 }

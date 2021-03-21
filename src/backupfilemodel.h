@@ -3,6 +3,7 @@
 
 #include <QAbstractItemModel>
 #include <QDebug>
+#include <QDir>
 #include <QFileIconProvider>
 #include <QFileInfo>
 #include <QMimeData>
@@ -26,8 +27,12 @@ class BackupFileModel : public QStandardItemModel {
   QStringList mimeTypes() const override;
   void addFolder(QUrl url);
 
+ public slots:
+
  private:
   QStandardItem *node;
+  QStringList savePath;
+  bool setPath(QString path);
  signals:
 };
 
