@@ -9,6 +9,7 @@
 #include <QKeySequence>
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QSettings>
 #include <QShortcut>
 #include <QString>
 #include <QSystemTrayIcon>
@@ -36,10 +37,12 @@ class MainWindow : public QMainWindow {
   Ui::MainWindow *ui;
   QSystemTrayIcon *trayIcon;
   QString rootSavePath;
+  QSettings *settings;
 
  private slots:
   void iconActivated(QSystemTrayIcon::ActivationReason reason);
   void setSaveRoot();
   void startSaving();
+  void saveSettings();
 };
 #endif  // MAINWINDOW_H

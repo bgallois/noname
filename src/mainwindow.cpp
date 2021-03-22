@@ -44,6 +44,17 @@ MainWindow::MainWindow(QWidget *parent)
 
   // Path
   connect(ui->ui_destBut, &QPushButton::clicked, this, &MainWindow::setSaveRoot);
+
+  // Settings
+  settings = new QSettings("noname", "B&GInc");
+  this->resize(settings->value("mainwindow/size", QSize(400, 400)).toSize());
+  this->move(settings->value("mainwindow/pos", QPoint(200, 200)).toPoint());
+  ui->ui_destDisp->setText(settings->value("data/rootPath").toString());
+  rootSavePath = settings->value("data/rootPath").toString();
+  QStringList savePath = settings->value("data/pathList").toStringList();
+  for (auto const &a : savePath) {
+    backupFileModel->addFolder(QUrl::fromLocalFile(a));
+  }
 }
 
 MainWindow::~MainWindow() {
@@ -51,6 +62,7 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {
+  saveSettings();
   if (trayIcon->isVisible()) {
     QMessageBox::information(this, tr("Systray"),
                              tr("The program will keep running in the "
@@ -95,4 +107,12 @@ void MainWindow::startSaving() {
   connect(thread, &QThread::finished, thread, &QThread::deleteLater);
 
   thread->start();
+}
+
+void MainWindow::saveSettings() {
+  settings->setValue("mainwindow/size", this->size());
+  settings->setValue("mainwindow/pos", this->pos());
+  QStringList pathList = qobject_cast<BackupFileModel *>(ui->ui_backupFileView->model())->getPathList();
+  settings->setValue("data/pathList", pathList);
+  settings->setValue("data/rootPath", this->rootSavePath);
 }
