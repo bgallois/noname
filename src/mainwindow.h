@@ -12,7 +12,9 @@
 #include <QShortcut>
 #include <QString>
 #include <QSystemTrayIcon>
+#include <QThread>
 #include "backupfilemodel.h"
+#include "copior.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -38,5 +40,6 @@ class MainWindow : public QMainWindow {
  private slots:
   void iconActivated(QSystemTrayIcon::ActivationReason reason);
   void setSaveRoot();
+  void startSaving();
 };
 #endif  // MAINWINDOW_H

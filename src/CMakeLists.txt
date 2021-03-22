@@ -36,6 +36,8 @@ set(PROJECT_SOURCES
         mainwindow.ui
         backupfilemodel.cpp
         backupfilemodel.h
+        copior.cpp
+        copior.h
         resources.qrc
         ${TS_FILES}
 )

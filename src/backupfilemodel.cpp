@@ -61,3 +61,7 @@ bool BackupFileModel::setPath(QString path) {
   savePath.append(absolutePath);
   return true;
 }
+
+QStringList BackupFileModel::getPathList() {
+  return savePath;
+}

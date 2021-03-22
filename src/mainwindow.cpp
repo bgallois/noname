@@ -40,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
       deleteShort, &QShortcut::activated, [this, backupFileModel, deleteShort]() {
         backupFileModel->removeRow(ui->ui_backupFileView->currentIndex().row(), ui->ui_backupFileView->currentIndex().parent());
       });
+  connect(ui->ui_backupBut, &QPushButton::clicked, this, &MainWindow::startSaving);
 
   // Path
   connect(ui->ui_destBut, &QPushButton::clicked, this, &MainWindow::setSaveRoot);
@@ -79,4 +80,19 @@ void MainWindow::setSaveRoot() {
   QString dir = QFileDialog::getExistingDirectory(this, tr("Select Directory"), QDir::homePath(), QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
   ui->ui_destDisp->setText(dir);
   rootSavePath = dir;
+}
+
+void MainWindow::startSaving() {
+  QStringList pathList = qobject_cast<BackupFileModel *>(ui->ui_backupFileView->model())->getPathList();
+  QThread *thread = new QThread;
+  Copior *copior = new Copior(pathList, this->rootSavePath);
+  copior->moveToThread(thread);
+
+  connect(thread, &QThread::started, copior, &Copior::start);
+  connect(copior, &Copior::update, ui->ui_log, &QTextEdit::append);
+  connect(copior, &Copior::finished, thread, &QThread::quit);
+  connect(copior, &Copior::finished, copior, &Copior::deleteLater);
+  connect(thread, &QThread::finished, thread, &QThread::deleteLater);
+
+  thread->start();
 }

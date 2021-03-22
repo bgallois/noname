@@ -28,6 +28,7 @@ class BackupFileModel : public QStandardItemModel {
   void addFolder(QUrl url);
 
  public slots:
+  QStringList getPathList();
 
  private:
   QStandardItem *node;
