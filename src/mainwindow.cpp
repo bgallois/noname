@@ -33,13 +33,21 @@ MainWindow::MainWindow(QWidget *parent)
   ui->ui_backupFileView->setDragEnabled(true);
   ui->ui_backupFileView->viewport()->setAcceptDrops(true);
   ui->ui_backupFileView->setDropIndicatorShown(true);
+  ui->ui_backupFileView->expandAll();
 
   // Shortcuts
   QShortcut *deleteShort = new QShortcut(QKeySequence(tr("Delete")), ui->ui_backupFileView);
 
   connect(
       deleteShort, &QShortcut::activated, [this, backupFileModel, deleteShort]() {
-        backupFileModel->removeRow(ui->ui_backupFileView->currentIndex().row(), ui->ui_backupFileView->currentIndex().parent());
+        // Find root parent and parent row to delete the root folder
+        QModelIndex rootParent = ui->ui_backupFileView->currentIndex().parent();
+        int row = ui->ui_backupFileView->currentIndex().row();
+        while (rootParent.parent() != QModelIndex()) {
+          row = rootParent.row();
+          rootParent = rootParent.parent();
+        }
+        backupFileModel->removeFolder(row, rootParent);
       });
   connect(ui->ui_backupBut, &QPushButton::clicked, this, &MainWindow::startSaving);
 
@@ -143,5 +151,4 @@ void MainWindow::setTimer(const QTime &time) {
   autoSavingTimer->setSingleShot(true);
   autoSavingTimer->setInterval(deltaTime);
   autoSavingTimer->start();
-  qInfo() << deltaTime;
 }

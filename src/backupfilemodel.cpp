@@ -51,11 +51,19 @@ void BackupFileModel::addFolder(QUrl url) {
   }
 }
 
+void BackupFileModel::removeFolder(int row, const QModelIndex &parent) {
+  removeRow(row, parent);
+  savePath.removeAt(row);
+}
+
 bool BackupFileModel::setPath(QString path) {
   QString absolutePath = QDir("/" + path).absolutePath();
-  for (auto const &a : savePath) {
-    if (absolutePath.contains(a)) {
+  for (int i = 0; i < savePath.size(); i++) {
+    if (absolutePath.contains(savePath[i])) {
       return false;
+    }
+    else if (savePath[i].contains(absolutePath)) {
+      removeFolder(i, index(0, 0));
     }
   }
   savePath.append(absolutePath);

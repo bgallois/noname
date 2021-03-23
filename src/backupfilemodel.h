@@ -26,6 +26,7 @@ class BackupFileModel : public QStandardItemModel {
   Qt::ItemFlags flags(const QModelIndex &index) const override;
   QStringList mimeTypes() const override;
   void addFolder(QUrl url);
+  void removeFolder(int row, const QModelIndex &parent = QModelIndex());
 
  public slots:
   QStringList getPathList();
