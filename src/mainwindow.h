@@ -9,11 +9,14 @@
 #include <QKeySequence>
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QModelIndex>
 #include <QSettings>
 #include <QShortcut>
 #include <QString>
 #include <QSystemTrayIcon>
 #include <QThread>
+#include <QTime>
+#include <QTimer>
 #include "backupfilemodel.h"
 #include "copior.h"
 
@@ -38,11 +41,14 @@ class MainWindow : public QMainWindow {
   QSystemTrayIcon *trayIcon;
   QString rootSavePath;
   QSettings *settings;
+  QTimer *autoSavingTimer;
+  void autoSave();
 
  private slots:
   void iconActivated(QSystemTrayIcon::ActivationReason reason);
   void setSaveRoot();
   void startSaving();
   void saveSettings();
+  void setTimer(const QTime &time);
 };
 #endif  // MAINWINDOW_H

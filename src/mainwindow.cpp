@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
   localFileModel->setRootPath(QDir::homePath());
   ui->ui_localFileView->setModel(localFileModel);
   ui->ui_localFileView->setCurrentIndex(localFileModel->index(QDir::homePath()));
+  localFileModel->setFilter(QDir::AllDirs);
 
   // File model/view local file
   BackupFileModel *backupFileModel = new BackupFileModel;
@@ -55,6 +56,13 @@ MainWindow::MainWindow(QWidget *parent)
   for (auto const &a : savePath) {
     backupFileModel->addFolder(QUrl::fromLocalFile(a));
   }
+
+  // Timer
+  autoSavingTimer = new QTimer(this);
+  connect(ui->ui_time, &QTimeEdit::timeChanged, this, &MainWindow::setTimer);
+  connect(autoSavingTimer, &QTimer::timeout, this, &MainWindow::autoSave);
+  ui->ui_isAuto->setChecked(settings->value("data/auto").toBool());
+  ui->ui_time->setTime(settings->value("data/time").toTime());
 }
 
 MainWindow::~MainWindow() {
@@ -115,4 +123,25 @@ void MainWindow::saveSettings() {
   QStringList pathList = qobject_cast<BackupFileModel *>(ui->ui_backupFileView->model())->getPathList();
   settings->setValue("data/pathList", pathList);
   settings->setValue("data/rootPath", this->rootSavePath);
+  settings->setValue("data/auto", ui->ui_isAuto->isChecked());
+  settings->setValue("data/time", ui->ui_time->time());
+}
+
+void MainWindow::autoSave() {
+  if (ui->ui_isAuto->isChecked()) {
+    startSaving();
+  }
+  setTimer(ui->ui_time->time());
+}
+
+void MainWindow::setTimer(const QTime &time) {
+  int deltaTime = QTime::currentTime().msecsTo(time);
+  // If time already passed
+  if (deltaTime < 0) {
+    deltaTime += 86400000;  // Add 24h
+  }
+  autoSavingTimer->setSingleShot(true);
+  autoSavingTimer->setInterval(deltaTime);
+  autoSavingTimer->start();
+  qInfo() << deltaTime;
 }
