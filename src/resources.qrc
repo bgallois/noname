@@ -1,6 +1,8 @@
 <RCC>
     <qresource prefix='/'>
         <file>assets/icon.svg</file>
+        <file>assets/font.ttf</file>
+        <file>assets/theme.qss</file>
     </qresource>
 </RCC>
 

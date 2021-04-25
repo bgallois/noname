@@ -9,13 +9,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="30"/>
+        <location filename="mainwindow.ui" line="100"/>
         <source>Destination</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="111"/>
+        <location filename="mainwindow.ui" line="109"/>
         <source>Backup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="122"/>
+        <source>Automatic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -29,22 +34,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="37"/>
+        <location filename="mainwindow.cpp" line="39"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="55"/>
+        <location filename="mainwindow.cpp" line="74"/>
         <source>Systray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="56"/>
+        <location filename="mainwindow.cpp" line="75"/>
         <source>The program will keep running in the system tray. To terminate the program, choose &lt;b&gt;Close&lt;/b&gt; in the context menu of the system tray entry. To restore the program choose &lt;b&gt;Restore&lt;/b&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="80"/>
+        <location filename="mainwindow.cpp" line="99"/>
         <source>Select Directory</source>
         <translation type="unfinished"></translation>
     </message>

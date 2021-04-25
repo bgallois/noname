@@ -55,7 +55,7 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui->ui_destBut, &QPushButton::clicked, this, &MainWindow::setSaveRoot);
 
   // Settings
-  settings = new QSettings("noname", "B&GInc");
+  settings = new QSettings("QBackup", "B&GInc");
   this->resize(settings->value("mainwindow/size", QSize(400, 400)).toSize());
   this->move(settings->value("mainwindow/pos", QPoint(200, 200)).toPoint());
   ui->ui_destDisp->setText(settings->value("data/rootPath").toString());
