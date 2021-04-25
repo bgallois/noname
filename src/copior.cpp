@@ -13,7 +13,7 @@ void Copior::start() {
 
 bool Copior::recursiveCopy(QString path) {
   bool isCopied = false;
-  QDirIterator it(path, QDirIterator::Subdirectories);
+  QDirIterator it(path, QDir::AllEntries | QDir::Hidden | QDir::System, QDirIterator::Subdirectories);
   while (it.hasNext()) {
     // Create folders structure
     if (it.fileInfo().isDir()) {
@@ -22,18 +22,18 @@ bool Copior::recursiveCopy(QString path) {
     // Copy file
     else {
       // If file doesn't exist or are younger
-      if (QFileInfo(rootPath + it.filePath()).exists() && (QFileInfo(it.filePath()).lastModified() < QFileInfo(rootPath + it.filePath()).lastModified())) {
+      if (!QFileInfo(rootPath + it.filePath()).exists() || (QFileInfo(it.filePath()).lastModified() > QFileInfo(rootPath + it.filePath()).lastModified())) {
+        QFile::remove(rootPath + it.filePath());
         isCopied = QFile::copy(it.filePath(), rootPath + it.filePath());
+        if (isCopied) {
+          emit(update("<p style='color:green';>" + it.filePath() + " copied <b>SUCCESSFULLY</b> to " + rootPath + it.filePath() + "</p>"));
+        }
+        else {
+          emit(update("<p style='color:red';>" + it.filePath() + " copy <b>FAILED</b></p>"));
+        }
       }
       else {
-        emit(update(it.filePath() + " copy SKIPPED"));
-      }
-      // Send status
-      if (isCopied) {
-        emit(update(it.filePath() + " successfully copied " + rootPath + it.filePath()));
-      }
-      else {
-        emit(update(it.filePath() + " copy FAILED"));
+        emit(update("<p style='color:blue';>" + it.filePath() + " copy <b>SKIPPED</b></p>"));
       }
     }
     it.next();
