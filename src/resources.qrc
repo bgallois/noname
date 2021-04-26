@@ -3,6 +3,8 @@
         <file>assets/icon.svg</file>
         <file>assets/font.ttf</file>
         <file>assets/theme.qss</file>
+        <file>assets/buttons/remove.png</file>
+        <file>assets/buttons/next.png</file>
     </qresource>
 </RCC>
 

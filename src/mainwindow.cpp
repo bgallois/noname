@@ -38,17 +38,34 @@ MainWindow::MainWindow(QWidget *parent)
   // Shortcuts
   QShortcut *deleteShort = new QShortcut(QKeySequence(tr("Delete")), ui->ui_backupFileView);
 
-  connect(
-      deleteShort, &QShortcut::activated, [this, backupFileModel, deleteShort]() {
-        // Find root parent and parent row to delete the root folder
-        QModelIndex rootParent = ui->ui_backupFileView->currentIndex().parent();
-        int row = ui->ui_backupFileView->currentIndex().row();
-        while (rootParent.parent() != QModelIndex()) {
-          row = rootParent.row();
-          rootParent = rootParent.parent();
-        }
-        backupFileModel->removeFolder(row, rootParent);
-      });
+  // Toolbar
+  QIcon img(":/assets/buttons/remove.png");
+  QAction *removeAction = new QAction(img, tr("Remove folder from backup pool"));
+  removeAction->setStatusTip(tr("Remove folder from backup pool"));
+  connect(removeAction, &QAction::triggered, [this]() {
+    QKeyEvent *event = new QKeyEvent(QEvent::KeyPress, Qt::Key_Delete, Qt::NoModifier);
+    QCoreApplication::postEvent(ui->ui_backupFileView, event);
+  });
+  ui->toolBar->addAction(removeAction);
+
+  img = QIcon(":/assets/buttons/next.png");
+  QAction *addAction = new QAction(img, tr("Add folder to backup pool"));
+  removeAction->setStatusTip(tr("Add folder to backup pool"));
+  connect(addAction, &QAction::triggered, [this]() {
+    ui->ui_backupFileView->model()->dropMimeData(ui->ui_localFileView->model()->mimeData(ui->ui_localFileView->selectionModel()->selectedIndexes()), Qt::CopyAction, -1, -1, ui->ui_backupFileView->model()->index(0, 0));
+  });
+  ui->toolBar->addAction(addAction);
+
+  connect(deleteShort, &QShortcut::activated, [this, backupFileModel, deleteShort]() {
+    // Find root parent and parent row to delete the root folder
+    QModelIndex rootParent = ui->ui_backupFileView->currentIndex().parent();
+    int row = ui->ui_backupFileView->currentIndex().row();
+    while (rootParent.parent() != QModelIndex()) {
+      row = rootParent.row();
+      rootParent = rootParent.parent();
+    }
+    backupFileModel->removeFolder(row, rootParent);
+  });
   connect(ui->ui_backupBut, &QPushButton::clicked, this, &MainWindow::startSaving);
 
   // Path

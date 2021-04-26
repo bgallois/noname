@@ -15,14 +15,56 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLineEdit" name="ui_destDisp">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="ui_destBut">
+        <property name="text">
+         <string>Destination</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="2" column="0">
+     <widget class="QPushButton" name="ui_backupBut">
+      <property name="text">
+       <string>Backup</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QCheckBox" name="ui_isAuto">
+      <property name="maximumSize">
+       <size>
+        <width>85</width>
+        <height>21</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Automatic</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QTimeEdit" name="ui_time">
+      <property name="maximumSize">
+       <size>
+        <width>61</width>
+        <height>24</height>
+       </size>
+      </property>
+     </widget>
+    </item>
     <item row="0" column="0" colspan="3">
      <widget class="QSplitter" name="ui_verticalSplit">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>
@@ -80,57 +122,7 @@
         </attribute>
        </widget>
       </widget>
-     </widget>
-    </item>
-    <item row="1" column="0" colspan="3">
-     <widget class="QTextEdit" name="ui_log"/>
-    </item>
-    <item row="2" column="0" colspan="3">
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QLineEdit" name="ui_destDisp">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="ui_destBut">
-        <property name="text">
-         <string>Destination</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="3" column="0">
-     <widget class="QPushButton" name="ui_backupBut">
-      <property name="text">
-       <string>Backup</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QCheckBox" name="ui_isAuto">
-      <property name="maximumSize">
-       <size>
-        <width>85</width>
-        <height>21</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Automatic</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="2">
-     <widget class="QTimeEdit" name="ui_time">
-      <property name="maximumSize">
-       <size>
-        <width>61</width>
-        <height>24</height>
-       </size>
-      </property>
+      <widget class="QTextEdit" name="ui_log"/>
      </widget>
     </item>
    </layout>
@@ -146,6 +138,29 @@
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="movable">
+    <bool>true</bool>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::LeftToolBarArea|Qt::RightToolBarArea</set>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>RightToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
  </widget>
  <resources/>
  <connections/>

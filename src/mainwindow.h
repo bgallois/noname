@@ -1,11 +1,14 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QAction>
 #include <QCloseEvent>
+#include <QCoreApplication>
 #include <QDir>
 #include <QFileDialog>
 #include <QFileSystemModel>
 #include <QIcon>
+#include <QKeyEvent>
 #include <QKeySequence>
 #include <QMainWindow>
 #include <QMessageBox>
