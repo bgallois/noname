@@ -22,9 +22,6 @@ Qt::ItemFlags BackupFileModel::flags(const QModelIndex &index) const {
 
 bool BackupFileModel::dropMimeData(const QMimeData *data,
                                    Qt::DropAction action, int row, int column, const QModelIndex &parent) {
-  if (!parent.isValid())
-    return false;
-
   bool success = true;
   QList<QUrl> urls = data->urls();
   for (auto &a : urls) {

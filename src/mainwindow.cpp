@@ -28,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
 
   // File model/view local file
   BackupFileModel *backupFileModel = new BackupFileModel;
+  backupFileModel->setHeaderData(0, Qt::Horizontal, "Folder");
   ui->ui_backupFileView->setModel(backupFileModel);
   ui->ui_backupFileView->setAcceptDrops(true);
   ui->ui_backupFileView->setDragEnabled(true);
@@ -128,13 +129,19 @@ void MainWindow::setSaveRoot() {
 }
 
 void MainWindow::startSaving() {
+  ui->ui_log->clear();
+  trayIcon->showMessage(tr("Starting backup"), tr(""), QSystemTrayIcon::Information, 5000);
+
   QStringList pathList = qobject_cast<BackupFileModel *>(ui->ui_backupFileView->model())->getPathList();
-  QThread *thread = new QThread;
+  QThread *thread = new QThread(this);
   Copior *copior = new Copior(pathList, this->rootSavePath);
   copior->moveToThread(thread);
 
   connect(thread, &QThread::started, copior, &Copior::start);
   connect(copior, &Copior::update, ui->ui_log, &QTextEdit::append);
+  connect(copior, &Copior::finished, this, [this]() {
+    trayIcon->showMessage(tr("Backup finished"), tr(""), QSystemTrayIcon::Information, 0);
+  });
   connect(copior, &Copior::finished, thread, &QThread::quit);
   connect(copior, &Copior::finished, copior, &Copior::deleteLater);
   connect(thread, &QThread::finished, thread, &QThread::deleteLater);
