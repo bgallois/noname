@@ -9,6 +9,7 @@ void Copior::start() {
   for (auto const &a : pathList) {
     recursiveCopy(a);
   }
+  emit(finished());
 }
 
 bool Copior::recursiveCopy(QString path) {
