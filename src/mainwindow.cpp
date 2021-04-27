@@ -72,23 +72,33 @@ MainWindow::MainWindow(QWidget *parent)
   // Path
   connect(ui->ui_destBut, &QPushButton::clicked, this, &MainWindow::setSaveRoot);
 
-  // Settings
+  ui->ui_backupBut->setEnabled(false);
+  connect(ui->ui_destDisp, &QLineEdit::textChanged, [this](const QString &text) {
+    if (!text.isEmpty()) {
+      ui->ui_backupBut->setEnabled(true);
+    }
+    else {
+      ui->ui_backupBut->setEnabled(false);
+    }
+  });
+
+  // Timer
+  autoSavingTimer = new QTimer(this);
+  connect(ui->ui_time, &QTimeEdit::timeChanged, this, &MainWindow::setTimer);
+  connect(autoSavingTimer, &QTimer::timeout, this, &MainWindow::autoSave);
+
+  //  Settings
   settings = new QSettings("QBackup", "B&GInc");
   this->resize(settings->value("mainwindow/size", QSize(400, 400)).toSize());
   this->move(settings->value("mainwindow/pos", QPoint(200, 200)).toPoint());
+  ui->ui_isAuto->setChecked(settings->value("data/auto").toBool());
+  ui->ui_time->setTime(settings->value("data/time").toTime());
   ui->ui_destDisp->setText(settings->value("data/rootPath").toString());
   rootSavePath = settings->value("data/rootPath").toString();
   QStringList savePath = settings->value("data/pathList").toStringList();
   for (auto const &a : savePath) {
     backupFileModel->addFolder(QUrl::fromLocalFile(a));
   }
-
-  // Timer
-  autoSavingTimer = new QTimer(this);
-  connect(ui->ui_time, &QTimeEdit::timeChanged, this, &MainWindow::setTimer);
-  connect(autoSavingTimer, &QTimer::timeout, this, &MainWindow::autoSave);
-  ui->ui_isAuto->setChecked(settings->value("data/auto").toBool());
-  ui->ui_time->setTime(settings->value("data/time").toTime());
 }
 
 MainWindow::~MainWindow() {
