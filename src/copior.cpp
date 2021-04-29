@@ -6,8 +6,11 @@ Copior::Copior(QStringList pathList, QString rootPath, QObject *parent) : QObjec
 }
 
 void Copior::start() {
+  int i = 0;
   for (auto const &a : pathList) {
     recursiveCopy(a);
+    ++i;
+    emit(progressChanged(i));
   }
   emit(finished());
 }

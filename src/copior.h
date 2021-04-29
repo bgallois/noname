@@ -12,7 +12,10 @@
 class Copior : public QObject {
   Q_OBJECT
  public:
+  Copior() = default;
   explicit Copior(QStringList pathList, QString rootPath, QObject *parent = nullptr);
+  Copior(const Copior &T) = delete;
+  Copior &operator=(const Copior &T) = delete;
 
  public slots:
   void start();
@@ -20,6 +23,7 @@ class Copior : public QObject {
  signals:
   void update(QString message);
   void finished();
+  void progressChanged(int value);
 
  private:
   QStringList pathList;

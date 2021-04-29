@@ -145,6 +145,8 @@ void MainWindow::startSaving() {
   QStringList pathList = qobject_cast<BackupFileModel *>(ui->ui_backupFileView->model())->getPathList();
   QThread *thread = new QThread(this);
   Copior *copior = new Copior(pathList, this->rootSavePath);
+  ui->ui_progressBar->setRange(0, pathList.size());
+  connect(copior, &Copior::progressChanged, ui->ui_progressBar, &QProgressBar::setValue);
   copior->moveToThread(thread);
 
   connect(thread, &QThread::started, copior, &Copior::start);

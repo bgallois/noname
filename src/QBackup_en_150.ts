@@ -9,22 +9,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="34"/>
+        <location filename="mainwindow.ui" line="27"/>
         <source>Set automatic backup each day at a given time.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="50"/>
+        <location filename="mainwindow.ui" line="43"/>
         <source>HH:MM:SS of the day.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="68"/>
+        <location filename="mainwindow.ui" line="61"/>
         <source>Local files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="103"/>
+        <location filename="mainwindow.ui" line="96"/>
         <source>Add folders to backup. Each subfolder and file will be backuped.</source>
         <oldsource>Add folders to backup. Reach subfolder and files will be backuped.</oldsource>
         <translation type="unfinished"></translation>
@@ -35,22 +35,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="37"/>
+        <location filename="mainwindow.ui" line="30"/>
         <source>Automatic at</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="53"/>
+        <location filename="mainwindow.ui" line="46"/>
         <source>HH:mm:ss</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="21"/>
+        <location filename="mainwindow.ui" line="130"/>
         <source>Backup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="167"/>
+        <location filename="mainwindow.ui" line="174"/>
         <source>toolBar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -102,7 +102,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="153"/>
+        <location filename="mainwindow.cpp" line="155"/>
         <source>Backup finished</source>
         <translation type="unfinished"></translation>
     </message>
